@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eugenpro.presentation.mainScreen.MainScreen
+import com.example.eugenpro.presentation.navigation.AppNavigation
 import com.example.eugenpro.presentation.viewModels.MainScreenViewModels
 import com.example.eugenpro.ui.theme.EugenProTheme
 
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         val viewModel: MainScreenViewModels by viewModels()
         setContent {
             EugenProTheme {
-                MainScreen(viewModel)
+                AppNavigation()
             }
         }
     }
