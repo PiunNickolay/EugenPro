@@ -39,15 +39,20 @@ import com.example.eugenpro.presentation.viewModels.MainScreenViewModels
 
 
 @Composable
-fun MainScreen(viewModel: MainScreenViewModels) {
+fun MainScreen(
+    viewModel: MainScreenViewModels,
+    onNavigateToSettingsScreen: () -> Unit,
+    onNavigateToWorkoutScreen: () -> Unit,
+    onNavigateToAddExerciseScreen: () -> Unit
+) {
     val feedPost = viewModel.exercises.observeAsState(listOf())
     Scaffold(
         modifier = Modifier.background(color = MaterialTheme.colorScheme.background),
         topBar = {
-            TopBar()
+            TopBar(onClick = onNavigateToSettingsScreen)
         },
         bottomBar = {
-            BottomBar()
+            BottomBar(startWorkoutButton = onNavigateToWorkoutScreen, addExerciseButton = onNavigateToAddExerciseScreen)
         }
     ) { innerPadding ->
         if (feedPost.value.isNotEmpty()) {
@@ -90,7 +95,7 @@ fun MainScreen(viewModel: MainScreenViewModels) {
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,7 +103,7 @@ fun TopBar() {
         horizontalArrangement = Arrangement.End
     ) {
         Button(
-            onClick = {},
+            onClick = onClick,
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary
@@ -112,7 +117,10 @@ fun TopBar() {
 }
 
 @Composable
-fun BottomBar() {
+fun BottomBar(
+    startWorkoutButton: () -> Unit,
+    addExerciseButton: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,7 +128,7 @@ fun BottomBar() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         FloatingActionButton(
-            onClick = {},
+            onClick = addExerciseButton,
             shape = RoundedCornerShape(12.dp),
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -134,7 +142,7 @@ fun BottomBar() {
         }
         Spacer(modifier = Modifier.height(12.dp))
         Button(
-            onClick = {},
+            onClick = startWorkoutButton,
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary
