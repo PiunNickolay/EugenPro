@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">EugenPro</string>
+    <string name="app_name" translatable="false">EugenPro</string>
+    <string name="start_workout">Start workout</string>
 </resources>

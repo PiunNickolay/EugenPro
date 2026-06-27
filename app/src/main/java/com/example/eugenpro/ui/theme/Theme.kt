@@ -30,28 +30,6 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = OrangePrimary.copy(alpha = 0.8f),
     onTertiary = Color.White,
     background = DarkBlueBg,
-    onBackground = Color.White,
-    surface = GraphiteSurface,
-    onSurface = Color.White,
-    surfaceVariant = GraySecondary,
-    onSurfaceVariant = Color.White.copy(alpha = 0.85f),
-    outline = OutlineDark,
-    outlineVariant = OutlineDark.copy(alpha = 0.6f),
-    error = ErrorColor,
-    onError = Color.White,
-    inversePrimary = OrangePrimary.copy(alpha = 0.9f),
-    inverseSurface = Color.White,
-    inverseOnSurface = DarkBlueBg,
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = OrangePrimary,
-    onPrimary = Color.White,
-    secondary = GraySecondary,
-    onSecondary = Color.White,
-    tertiary = OrangePrimary.copy(alpha = 0.8f),
-    onTertiary = Color.White,
-    background = LightBg,
     onBackground = DarkBlueBg,
     surface = LightSurface,
     onSurface = LightOnSurface,
@@ -66,11 +44,33 @@ private val LightColorScheme = lightColorScheme(
     inverseOnSurface = Color.White,
 )
 
+private val LightColorScheme = lightColorScheme(
+    primary = OrangePrimary,
+    onPrimary = Color.White,
+    secondary = GraySecondary,
+    onSecondary = Color.White,
+    tertiary = OrangePrimary.copy(alpha = 0.8f),
+    onTertiary = Color.White,
+    background = DarkBlueBg,
+    onBackground = Color.White,
+    surface = GraphiteSurface,
+    onSurface = Color.White,
+    surfaceVariant = GraySecondary,
+    onSurfaceVariant = Color.White.copy(alpha = 0.85f),
+    outline = OutlineDark,
+    outlineVariant = OutlineDark.copy(alpha = 0.6f),
+    error = ErrorColor,
+    onError = Color.White,
+    inversePrimary = OrangePrimary.copy(alpha = 0.9f),
+    inverseSurface = Color.White,
+    inverseOnSurface = DarkBlueBg,
+)
+
 @Composable
 fun EugenProTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
