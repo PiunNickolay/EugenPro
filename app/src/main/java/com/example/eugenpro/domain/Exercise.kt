@@ -5,5 +5,6 @@ data class Exercise(
     val exerciseName: String,
     val exerciseTime: String,
     val exerciseRepetitions: Int,
-    val restTime: String
+    val restTime: String,
+    val restTimeAfterExercise: String
 )

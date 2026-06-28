@@ -22,6 +22,9 @@ class AddExerciseViewModel : ViewModel() {
     private val _repetitions = MutableStateFlow(1)
     val repetitions: StateFlow<Int> = _repetitions.asStateFlow()
 
+    private val _restTimeAfterExercise = MutableStateFlow(30)
+    val restTimeAfterExercise: StateFlow<Int> = _restTimeAfterExercise.asStateFlow()
+
     fun updateName(newName: String) {
         if (newName.isNotBlank()) _name.value = newName
     }
@@ -38,11 +41,16 @@ class AddExerciseViewModel : ViewModel() {
         if (count > 0) _repetitions.value = count
     }
 
+    fun updateRestTimeAfterExercise(time: Int) {
+        if (time > 0) _restTimeAfterExercise.value = time
+    }
+
     fun isValid(): Boolean {
         return _name.value.isNotBlank() &&
                 _workTime.value > 0 &&
                 _restTime.value > 0 &&
-                _repetitions.value > 0
+                _repetitions.value > 0 &&
+                _restTimeAfterExercise.value > 0
     }
 
     fun createExercise(): Exercise? {
@@ -54,7 +62,8 @@ class AddExerciseViewModel : ViewModel() {
                 exerciseName = _name.value,
                 exerciseTime = _workTime.value.toString(),
                 exerciseRepetitions = _repetitions.value,
-                restTime = _restTime.value.toString()
+                restTime = _restTime.value.toString(),
+                restTimeAfterExercise = _restTimeAfterExercise.value.toString()
             )
         } else {
             Exercise(
@@ -62,7 +71,8 @@ class AddExerciseViewModel : ViewModel() {
                 exerciseName = _name.value,
                 exerciseTime = _workTime.value.toString(),
                 exerciseRepetitions = _repetitions.value,
-                restTime = _restTime.value.toString()
+                restTime = _restTime.value.toString(),
+                restTimeAfterExercise = _restTimeAfterExercise.value.toString()
             )
         }
     }
@@ -73,6 +83,7 @@ class AddExerciseViewModel : ViewModel() {
         _workTime.value = exercise.exerciseTime.toIntOrNull() ?: 30
         _restTime.value = exercise.restTime.toIntOrNull() ?: 30
         _repetitions.value = exercise.exerciseRepetitions
+        _restTimeAfterExercise.value = exercise.restTimeAfterExercise.toIntOrNull() ?: 30
     }
 
     fun resetForNewExercise() {
@@ -81,5 +92,6 @@ class AddExerciseViewModel : ViewModel() {
         _workTime.value = 30
         _restTime.value = 30
         _repetitions.value = 1
+        _restTimeAfterExercise.value = 30
     }
 }
