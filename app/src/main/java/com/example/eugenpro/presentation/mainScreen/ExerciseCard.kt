@@ -1,6 +1,5 @@
 package com.example.eugenpro.presentation.mainScreen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,19 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +29,11 @@ import com.example.eugenpro.domain.Exercise
 import com.example.eugenpro.ui.theme.EugenProTheme
 
 @Composable
-fun ExerciseCard(rejectClick: (Exercise) -> Unit, exercise: Exercise) {
+fun ExerciseCard(
+    rejectClick: (Exercise) -> Unit,
+    exercise: Exercise,
+    onClick: () -> Unit
+) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.onPrimary,
@@ -49,7 +47,8 @@ fun ExerciseCard(rejectClick: (Exercise) -> Unit, exercise: Exercise) {
             hoveredElevation = 4.dp,
             draggedElevation = 4.dp,
             disabledElevation = 4.dp,
-        )
+        ),
+        modifier = Modifier.clickable { onClick() }
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
             Row(
@@ -98,13 +97,5 @@ fun ExerciseCard(rejectClick: (Exercise) -> Unit, exercise: Exercise) {
                 Text(text = exercise.restTime)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ExerciseCardPreview() {
-    EugenProTheme(darkTheme = true) {
-        ExerciseCard(rejectClick = {}, exercise = Exercise(1, "push-ups", "5", 5, "25"))
     }
 }

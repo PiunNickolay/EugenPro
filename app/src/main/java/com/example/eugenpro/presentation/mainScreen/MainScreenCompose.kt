@@ -24,6 +24,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.eugenpro.R
-import com.example.eugenpro.presentation.viewModels.MainScreenViewModels
+import com.example.eugenpro.presentation.mainScreen.MainScreenViewModels
 
 
 @Composable
@@ -43,9 +45,10 @@ fun MainScreen(
     viewModel: MainScreenViewModels,
     onNavigateToSettingsScreen: () -> Unit,
     onNavigateToWorkoutScreen: () -> Unit,
-    onNavigateToAddExerciseScreen: () -> Unit
+    onNavigateToAddExerciseScreen: () -> Unit,
+    onEditExerciseCard: (Int) -> Unit
 ) {
-    val feedPost = viewModel.exercises.observeAsState(listOf())
+    val exercise by viewModel.exercises.collectAsState()
     Scaffold(
         modifier = Modifier.background(color = MaterialTheme.colorScheme.background),
         topBar = {
@@ -55,7 +58,7 @@ fun MainScreen(
             BottomBar(startWorkoutButton = onNavigateToWorkoutScreen, addExerciseButton = onNavigateToAddExerciseScreen)
         }
     ) { innerPadding ->
-        if (feedPost.value.isNotEmpty()) {
+        if (exercise.isNotEmpty()) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -68,12 +71,13 @@ fun MainScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 items(
-                    items = feedPost.value,
+                    items = exercise,
                     key = { it.id }
                 ) { exercise ->
                     ExerciseCard(
                         exercise = exercise,
-                        rejectClick = { viewModel.removeExercise(exercise) }
+                        rejectClick = { viewModel.removeExercise(exercise) },
+                        onClick = { onEditExerciseCard(exercise.id) }
                     )
                 }
             }
