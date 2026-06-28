@@ -40,16 +40,20 @@ fun AddExerciseCard(
     workTime: Int,
     restTime: Int,
     repetitions: Int,
+    restTimeAfterExercise: Int,
     onWorkTimeChange: (Int) -> Unit,
     onRestTimeChange: (Int) -> Unit,
     onRepetitionsChange: (Int) -> Unit,
+    onRestTimeAfterExercise: (Int) -> Unit,
     onSave: () -> Unit,
     onCancel: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.fillMaxWidth(0.9f).wrapContentHeight(),
+        modifier = Modifier
+            .fillMaxWidth(0.9f)
+            .wrapContentHeight(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.onPrimary
         ),
@@ -230,7 +234,7 @@ fun AddExerciseCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Время отдыха",
+                    text = "Отдых между",
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -298,6 +302,78 @@ fun AddExerciseCard(
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Отдыха после",
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = CircleShape
+                            )
+                    ) {
+                        Text(
+                            text = "${restTimeAfterExercise}s",
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f),
+                                    shape = CircleShape
+                                )
+                                .clickable { onRestTimeAfterExercise(restTimeAfterExercise + 5) }
+                        ) {
+                            Text(
+                                text = "+",
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f),
+                                    shape = CircleShape
+                                )
+                                .clickable { onRestTimeAfterExercise(restTimeAfterExercise - 5) }
+                        ) {
+                            Text(
+                                text = "-",
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Button(
@@ -335,11 +411,13 @@ fun CardExercisePreview() {
             workTime = 30,                          // ← Добавили
             onWorkTimeChange = { /* ничего не делаем */ },
             restTime = 15,
-            onRestTimeChange = { /*...*/},
+            restTimeAfterExercise = 15,
+            onRestTimeChange = { /*...*/ },
             repetitions = 1,
-            onRepetitionsChange = {/*...*/},
+            onRepetitionsChange = {/*...*/ },
             onSave = {},
-            onCancel = {}
+            onCancel = {},
+            onRestTimeAfterExercise = {/*...*/ }
         )
     }
 }
