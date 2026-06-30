@@ -46,7 +46,7 @@ fun MainScreen(
     onNavigateToSettingsScreen: () -> Unit,
     onNavigateToWorkoutScreen: () -> Unit,
     onNavigateToAddExerciseScreen: () -> Unit,
-    onEditExerciseCard: (Int) -> Unit
+    onEditExerciseCard: (Long) -> Unit
 ) {
     val exercise by viewModel.exercises.collectAsState()
     Scaffold(

@@ -1,6 +1,6 @@
 package com.example.eugenpro.presentation.navigation
 
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
 
 sealed class Routes(
     val route: String
@@ -18,6 +18,6 @@ sealed class Routes(
         const val SETTINGS = "settings_screen"
         const val EDIT_EXERCISE = "edit_exercise_screen/{exerciseId}"
 
-        fun editExercise(exerciseId: Int) = "edit_exercise_screen/$exerciseId"
+        fun editExercise(exerciseId: Long) = "edit_exercise_screen/$exerciseId"
     }
 }

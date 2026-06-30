@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.eugenpro.R
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
 import com.example.eugenpro.ui.theme.EugenProTheme
 
 @Composable

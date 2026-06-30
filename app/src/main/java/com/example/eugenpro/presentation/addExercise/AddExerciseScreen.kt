@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
 import com.example.eugenpro.presentation.mainScreen.MainScreenViewModels
 
 
@@ -23,7 +23,7 @@ fun AddExerciseScreen(
     onNavigateToMainScreen: () -> Unit,
     onSaveExercise: (Exercise) -> Unit,
     mainScreenViewModels: MainScreenViewModels,
-    exerciseId: Int? = null
+    exerciseId: Long? = null
 ) {
     val name by viewModel.name.collectAsState()
     val workTime by viewModel.workTime.collectAsState()
