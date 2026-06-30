@@ -56,9 +56,9 @@ fun AppNavigation() {
 
         composable(
             route = Routes.EditExercise.route,
-            arguments = listOf(navArgument("exerciseId") {type = NavType.IntType})
+            arguments = listOf(navArgument("exerciseId") {type = NavType.LongType})
         ) { backStackEntry ->
-            val exerciseId = backStackEntry.arguments?.getInt("exerciseId")
+            val exerciseId = backStackEntry.arguments?.getLong("exerciseId")
             val addExerciseViewModel: AddExerciseViewModel = viewModel()
             AddExerciseScreen(
                 viewModel = addExerciseViewModel,

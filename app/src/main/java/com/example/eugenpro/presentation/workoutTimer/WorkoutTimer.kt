@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.eugenpro.R
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

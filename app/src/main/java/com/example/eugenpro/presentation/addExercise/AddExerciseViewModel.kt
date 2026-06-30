@@ -3,13 +3,17 @@ package com.example.eugenpro.presentation.addExercise
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
+import com.example.eugenpro.domain.repository.ExerciseRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class AddExerciseViewModel : ViewModel() {
-    private var editExerciseId: Int? = null
+@HiltViewModel
+class AddExerciseViewModel @Inject constructor() : ViewModel() {
+    private var editExerciseId: Long? = null
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
 
@@ -67,7 +71,7 @@ class AddExerciseViewModel : ViewModel() {
             )
         } else {
             Exercise(
-                id = System.currentTimeMillis().toInt(),
+                id = System.currentTimeMillis(),
                 exerciseName = _name.value,
                 exerciseTime = _workTime.value.toString(),
                 exerciseRepetitions = _repetitions.value,

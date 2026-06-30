@@ -16,12 +16,13 @@ import com.example.eugenpro.presentation.mainScreen.MainScreen
 import com.example.eugenpro.presentation.navigation.AppNavigation
 import com.example.eugenpro.presentation.mainScreen.MainScreenViewModels
 import com.example.eugenpro.ui.theme.EugenProTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val viewModel: MainScreenViewModels by viewModels()
         setContent {
             EugenProTheme {
                 AppNavigation()

@@ -1,7 +1,7 @@
-package com.example.eugenpro.domain
+package com.example.eugenpro.domain.model
 
 data class Exercise(
-    val id: Int,
+    val id: Long,
     val exerciseName: String,
     val exerciseTime: String,
     val exerciseRepetitions: Int,

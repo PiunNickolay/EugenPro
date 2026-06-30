@@ -2,14 +2,17 @@ package com.example.eugenpro.presentation.workoutTimer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.eugenpro.domain.Exercise
+import com.example.eugenpro.domain.model.Exercise
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WorkoutTimerViewModel : ViewModel() {
+@HiltViewModel
+class WorkoutTimerViewModel @Inject constructor(): ViewModel() {
 
     private val _timer = MutableStateFlow(Timer.initial())
     val timer: StateFlow<Timer> = _timer.asStateFlow()
