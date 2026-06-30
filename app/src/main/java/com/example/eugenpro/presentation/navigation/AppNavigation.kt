@@ -1,6 +1,9 @@
 package com.example.eugenpro.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,6 +16,7 @@ import com.example.eugenpro.presentation.mainScreen.MainScreen
 import com.example.eugenpro.presentation.mainScreen.MainScreenViewModels
 import com.example.eugenpro.presentation.settings.SettingsScreen
 import com.example.eugenpro.presentation.workoutTimer.WorkoutTimerScreen
+import com.example.eugenpro.presentation.workoutTimer.WorkoutTimerViewModel
 
 @Composable
 fun AppNavigation() {
@@ -66,8 +70,18 @@ fun AppNavigation() {
         }
 
         composable(Routes.WorkoutTimer.route) {
+
+            val workoutTimerViewModel: WorkoutTimerViewModel = viewModel()
+
+            LaunchedEffect(Unit) {
+                workoutTimerViewModel.startWorkout(mainScreenViewModel.exercises.value)
+            }
+
             WorkoutTimerScreen(
-                onNavigateToMainScreen = { navController.popBackStack() }
+                viewModel = workoutTimerViewModel,
+                onNavigateToMainScreen = {
+                    navController.popBackStack()
+                }
             )
         }
     }
